@@ -1,0 +1,13 @@
+#about {
+  background-position: fixed;
+  margin: 0;
+  padding: 0;
+  background-repeat: repeat-y;
+  height: 100vh;
+  min-height: 700px;
+}
+
+.bg-gray {
+  background-color: whitesmoke;
+
+}
