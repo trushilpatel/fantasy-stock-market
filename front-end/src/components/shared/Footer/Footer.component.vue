@@ -1,6 +1,5 @@
 <template>
   <footer class="container-fluid footer bg-dark text-white pt-4 pb-4 ">
-
     <div class="text-center border-bottom pb-3">
       <div class="font-font-weight-bolder pb-4 ">
         <div>
@@ -8,21 +7,38 @@
         </div>
 
         <div class="pt-2">
-          <span class="">Subsribe to our news letter</span>
+          <span class="">Subsribe To Our News letters</span>
         </div>
       </div>
-      <form class="row ">
+
+      <!-- Get Subscribers Details -->
+      <form v-on:submit.prevent="submit($event)" class="row ">
         <div class="input-group col-sm-7 ml-auto mr-auto">
-          <input type="text" name="email" class='form-control border-0 rounded-0' placeholder="enter your email...">
+          <input
+            v-model="subscriber_email"
+            v-on:blur="$v.subscriber_email.$touch()"
+            type="text"
+            name="email"
+            class="form-control border-0 rounded-0"
+            placeholder="enter your email..."
+          />
           <div class="input-group-append">
-            <button class=" form-control btn btn-primary border-0 rounded-0" >Subscribe</button>
+            <button class=" form-control btn btn-primary border-0 rounded-0">
+              Subscribe
+            </button>
           </div>
         </div>
-
+        <div
+          v-if="$v.subscriber_email.$dirty && $v.subscriber_email.$invalid"
+          class="col-sm-7 ml-auto mr-auto lead text-danger small"
+        >
+          * Please Enter Valid Email address...
+        </div>
       </form>
     </div>
 
     <div class="container d-flex flex-row justify-content-around mt-3">
+      <!-- Social Media Connect With US -->
       <div>
         <div class="pb-1 ">
           <span class="d-block border-bottom ">
@@ -31,7 +47,10 @@
         </div>
         <div>
           <a href="https://www.facebook.com" target="_blank">
-            <font-awesome-icon :icon="['fab', 'facebook-square']" style="color: blue;"/>
+            <font-awesome-icon
+              :icon="['fab', 'facebook-square']"
+              style="color: blue;"
+            />
             <span class="small">
               Facebook
             </span>
@@ -39,7 +58,10 @@
         </div>
         <div>
           <a href="https://www.instagram.com" target="_blank">
-            <font-awesome-icon :icon="['fab', 'instagram-square']" style="color: pink;"/>
+            <font-awesome-icon
+              :icon="['fab', 'instagram-square']"
+              style="color: pink;"
+            />
             <span class="small">
               Instagram
             </span>
@@ -47,7 +69,10 @@
         </div>
         <div>
           <a href="https://www.twitter.com" target="_blank">
-            <font-awesome-icon :icon="['fab', 'twitter-square']" style="color: lightblue;"/>
+            <font-awesome-icon
+              :icon="['fab', 'twitter-square']"
+              style="color: lightblue;"
+            />
             <span class="small">
               Twitter
             </span>
@@ -55,13 +80,18 @@
         </div>
         <div>
           <a href="https://www.reddit.com" target="_blank">
-            <font-awesome-icon :icon="['fab', 'reddit-square']" style="color: red;"/>
+            <font-awesome-icon
+              :icon="['fab', 'reddit-square']"
+              style="color: red;"
+            />
             <span class="small">
               Reddit
             </span>
           </a>
         </div>
       </div>
+
+      <!-- Site Map -->
       <div class="pb-3">
         <div class="pb-1 ">
           <span class="d-block border-bottom ">
@@ -75,23 +105,22 @@
         </div>
       </div>
     </div>
-      <p class="text-muted align-baseline mt-1 text-center align-text-middle">
-        Copyright 2020 @FSM
-        <router-link to="/">
-          <img src="../../assets/FSM.png" height="30px" width="30px" class="ml-2 text-top">
-        </router-link>
-      </p>
+
+    <!-- Copyright -->
+    <p class="text-muted align-baseline mt-1 text-center align-text-middle">
+      Copyright 2020 @FSM
+      <router-link to="/">
+        <img
+          src="@/assets/FSM.png"
+          height="30px"
+          width="30px"
+          class="ml-2 text-top"
+        />
+      </router-link>
+    </p>
   </footer>
 </template>
 
-<script>
-export default {
-  name: 'Footer'
-}
-</script>
+<script src="./Footer.component.js" />
 
-<style scoped>
-footer {
-  margin-top: auto;
-}
-</style>
+<style scoped src="./Footer.component.css" />

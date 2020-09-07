@@ -3,7 +3,7 @@
     <div class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
       <!-- Brand Name -->
       <router-link to="/" class="navbar-brand">
-        <img src="../../assets/FSM.png" height="25px" width="25px" class="mr-2">
+        <img src="@/assets/FSM.png" height="25px" width="25px" class="mr-2" />
         FSM
       </router-link>
 
@@ -36,7 +36,9 @@
             <router-link to="/" exact class="nav-link">Home</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/contact-us" class="nav-link">Contact Us</router-link>
+            <router-link to="/contact-us" class="nav-link"
+              >Contact Us</router-link
+            >
           </li>
           <li class="nav-item">
             <router-link to="/about" class="nav-link">About</router-link>
@@ -60,14 +62,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Header'
-}
-</script>
+<script src="./Header.component.js" />
 
-<style scoped>
-  .container-fluid {
-    padding: 0px;
-  }
-</style>
+<style scoped src="./Header.component.css" />
