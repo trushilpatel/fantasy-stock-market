@@ -1,8 +1,6 @@
 #login {
   background-image: linear-gradient(to bottom right,rgb(70, 156, 182), yellow);
   background-position: fixed;
-  height: 100vh;
-  min-height: 700px;
   margin: 0;
   padding: 0;
   background-repeat: repeat-y;

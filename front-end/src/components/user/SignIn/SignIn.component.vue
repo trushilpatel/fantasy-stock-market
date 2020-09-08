@@ -1,17 +1,15 @@
 <template>
-  <div id="login" class="container-fluid">
+  <div id="login" class="container-fluid pb-5">
     <div class=" pt-md-5">
       <form
         v-on:submit.prevent="submit()"
         class="col-md-5 ml-auto mr-auto border border-dark p-4 shadow mt-auto mb-auto"
       >
         <div class=" text-center font-weight-bolder">
-          <div class="border-bottom border-dark lead display-4 ">FSM</div>
-          <span class="lead">
-            Sign in to continue...
-          </span>
+          <div class="lead display-4 ">FSM</div>
         </div>
-        <div class="my-4">
+
+        <div class="my-4 mb-5">
           <div class="form-group mt-5 border p-3 border-dark shadow-lg">
             <div class="input-group my-3">
               <span
@@ -20,10 +18,19 @@
                 E-mail
               </span>
               <input
+                v-model="email"
+                v-on:blur="$v.email.$touch()"
+                autocomplete="email"
                 type="email"
                 name="email"
                 class="form-control  text-white border-dark bg-gray border-0 rounded-0"
               />
+            </div>
+            <div
+              v-if="$v.email.$dirty && $v.email.$invalid"
+              class=" ml-auto mr-auto lead text-danger small"
+            >
+              * Please enter valid email address...
             </div>
             <div class="input-group my-4">
               <span
@@ -32,11 +39,21 @@
                 Password
               </span>
               <input
+                v-model="password"
+                v-on:blur="$v.password.$touch()"
+                autocomplete="password"
                 type="password"
                 name="password"
                 class="form-control text-white border-dark bg-gray border-0 rounded-0"
               />
             </div>
+            <div
+              v-if="$v.password.$dirty && $v.password.$invalid"
+              class="ml-auto mr-auto lead text-danger small"
+            >
+              * Password must be 8 character long (should contain small alphabet, capital alphabet,one number)
+            </div>
+
             <div class="mt-4 mb-4">
               <button
                 type="submit"
@@ -52,13 +69,15 @@
           <button
             type="submit"
             class="btn btn-block btn-success border-0 rounded-0"
+            v-on:click="$router.push('/sign-up')"
           >
-            Create New Account
+            Sign Up
           </button>
 
           <button
             type="submit"
             class="btn btn-block btn-danger border-0 rounded-0 "
+            data-onsuccess="onSignIn"
           >
             Sign In With Google
           </button>
@@ -68,6 +87,6 @@
   </div>
 </template>
 
-<script src="./login.component.js"></script>
+<script src="./SignIn.component.js"></script>
 
-<style src="./login.component.css" scoped></style>
+<style src="./SignIn.component.css" scoped></style>
