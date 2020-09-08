@@ -1,13 +1,40 @@
 #about {
-  background-position: fixed;
-  margin: 0;
-  padding: 0;
-  background-repeat: repeat-y;
-  height: 100vh;
-  min-height: 700px;
 }
 
 .bg-gray {
   background-color: whitesmoke;
 
+}
+
+.container-fluid {
+  background-position: fixed;
+  background: linear-Gradient(rgb(115, 163, 226), orange, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
+  transition: 15s;
+  color: rgb(200, 25, 25);
+}
+.text-small {
+  font-size: 0.8rem;
+}
+@keyframes gradient {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  25% {
+    background-position: 0% 100%;
+  }
+
+  50% {
+    background-position: 50% 50%;
+  }
+
+  75% {
+    background-position: 100% 0%;
+  }
+
+  100% {
+    background-position: 0% 0%;
+  }
 }

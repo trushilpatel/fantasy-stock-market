@@ -1,8 +1,6 @@
 #contact-us {
   background: linear-gradient(-45deg, #ee7752, rgb(115, 163, 226), #23a6d5, #23d5ab);
   background-size: 400% 400%;
-  min-height: 650px;
-  height: 100vh;
   animation: gradient 10s ease infinite;
   transition: 5s;
 }

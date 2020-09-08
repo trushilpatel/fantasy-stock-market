@@ -9,7 +9,7 @@
     <div class="row">
       <form
         v-on:submit.prevent="submit"
-        class="col-md-6 ml-auto mr-auto my-5 border py-5 px-4 shadow bg-dark text-white"
+        class="col-md-6 col-11 ml-auto mr-auto my-5 border py-5 px-4 shadow bg-dark text-white"
       >
         <div class="display-4 border-bottom pb-2 mb-4 ">Contact Us</div>
         <div class="input-group my-3">
