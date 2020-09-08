@@ -1,5 +1,12 @@
 <template>
   <footer class="container-fluid footer bg-dark text-white pt-4 pb-4 ">
+    <!-- Load Dynamic Message Modal -->
+    <Message
+      v-if="message !== ''"
+      v-bind:message="message"
+      v-on:close="message = ''; subscriber_email= ''; $v.subscriber_email.$reset()"
+    ></Message>
+
     <div class="text-center border-bottom pb-3">
       <div class="font-font-weight-bolder pb-4 ">
         <div>
@@ -15,7 +22,7 @@
       <form v-on:submit.prevent="submit($event)" class="row ">
         <div class="input-group col-sm-7 ml-auto mr-auto">
           <input
-            v-model="subscriber_email"
+            v-model.trim.lazy="subscriber_email"
             v-on:blur="$v.subscriber_email.$touch()"
             type="text"
             name="email"

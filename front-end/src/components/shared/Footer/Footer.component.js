@@ -1,11 +1,14 @@
 import { required, email } from 'vuelidate/lib/validators'
 import axios from 'axios'
+import Message from '../Message/Message.component.vue'
 
 export default {
   name: 'Footer',
+  components: { Message },
   data () {
     return {
-      subscriber_email: ''
+      subscriber_email: '',
+      message: ''
     }
   },
   validations: {
@@ -17,21 +20,30 @@ export default {
   methods: {
     submit: function () {
       const data = {
-        email_id: this.subscriber_email
+        emailId: this.subscriber_email
       }
-
-      axios.post(process.env.VUE_APP_BACK_END + '/newsletter_subscriber', data,
-        {
-          headers: {
-            'Access-Control-Allow-Origin': process.env.VUE_APP_BACK_END
-          }
+      console.log(this.$v.subscriber_email)
+      if (this.$v.subscriber_email.$invalid) {
+        this.message = {
+          title: 'Enter Valid Email id',
+          body: 'Please check entered email id'
         }
-      )
-        .then(response => {
-          console.log('Successfully subscribed : ' + this.subscriber_email)
-          console.log('Response From Back End')
-          console.log(response)
-        })
+      } else {
+        axios.post(process.env.VUE_APP_BACK_END + '/newsletter_subscriber', data,
+          {
+            headers: {
+              'Access-Control-Allow-Origin': process.env.VUE_APP_BACK_END
+            }
+          }
+        )
+          .then(response => {
+            this.message = {
+              title: 'Thank You For Subscribing to our Newsletters',
+              body: this.subscriber_email + ' is successfully subscribed'
+            }
+            console.log(this.message)
+          })
+      }
     }
   }
 }
