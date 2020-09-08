@@ -2,36 +2,52 @@ package com.FantasyStockMarket.FSM.Controllers.NewsletterSubscribers;
 
 import com.FantasyStockMarket.FSM.Entity.Newsletter_Subscribers.NewsletterSubscribers;
 import com.FantasyStockMarket.FSM.Entity.Newsletter_Subscribers.NewsletterSubscribersRepository;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
+import com.FantasyStockMarket.FSM.Response.Message;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
+import javax.persistence.*;
 import java.util.List;
 
-@Component
+@Service
 public class NewsletterSubscribersServices {
     @Autowired
     private NewsletterSubscribersRepository nsRepository;
 
+    @PersistenceContext
     private EntityManager entityManager;
 
-    @Autowired
-
-
-    List<NewsletterSubscribers> getAllNewslettersSubscribers(){
+    List<NewsletterSubscribers> getAllNewslettersSubscribers() {
         return nsRepository.findAll();
     }
 
-    NewsletterSubscribers saveNewSubscriber(NewsletterSubscribers newSubscriber){
+    NewsletterSubscribers saveNewSubscriber(NewsletterSubscribers newSubscriber) {
         try {
             return nsRepository.save(newSubscriber);
-        } catch (Exception userAlreadyExist){
-            return newSubscriber;
-            //Example<NewsletterSubscribers> example = Example.of();
-            //return nsRepository.findOne();
+        } catch (Exception userAlreadyExist) {
+            TypedQuery<NewsletterSubscribers> query = entityManager.createQuery(
+                    "select ns from NewsletterSubscribers ns",
+                    NewsletterSubscribers.class);
+
+            List<NewsletterSubscribers> result = query.getResultList();
+            return result.get(0);
         }
+    }
+
+    Message deleteSubscriber(NewsletterSubscribers subscriber) {
+        try {
+            nsRepository.deleteByEmailId(subscriber.getEmailId());
+        } catch (Exception subscriberNotExist){
+
+        }
+
+        return new Message(
+                "Successfully Removed " + subscriber.getEmailId() + " from Newsletter Subscriptions...",
+                "202"
+        );
     }
 }

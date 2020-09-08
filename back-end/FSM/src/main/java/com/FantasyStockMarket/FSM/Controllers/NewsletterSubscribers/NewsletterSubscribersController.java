@@ -1,7 +1,9 @@
 package com.FantasyStockMarket.FSM.Controllers.NewsletterSubscribers;
 
 import com.FantasyStockMarket.FSM.Entity.Newsletter_Subscribers.NewsletterSubscribers;
+import com.FantasyStockMarket.FSM.Response.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,16 +14,22 @@ import java.util.List;
 public class NewsletterSubscribersController {
 
     @Autowired
-    private  NewsletterSubscribersServices nsServices;
+    private NewsletterSubscribersServices newsletterSubscribersServices;
 
 
     @GetMapping("")
-    List<NewsletterSubscribers> getAllNewsletterSubscribers(){
-        return nsServices.getAllNewslettersSubscribers();
+    List<NewsletterSubscribers> getAllNewsletterSubscribers() {
+        return newsletterSubscribersServices.getAllNewslettersSubscribers();
     }
 
     @PostMapping("")
-    NewsletterSubscribers saveNewSubscriber(@RequestBody NewsletterSubscribers newSubscriber){
-        return nsServices.saveNewSubscriber(newSubscriber);
+    NewsletterSubscribers saveNewSubscriber(@RequestBody NewsletterSubscribers newSubscriber) {
+        return newsletterSubscribersServices.saveNewSubscriber(newSubscriber);
+    }
+
+    @DeleteMapping("")
+    @Transactional
+    Message deleteSubscriber(@RequestBody NewsletterSubscribers deleteSubscriber) {
+        return newsletterSubscribersServices.deleteSubscriber(deleteSubscriber);
     }
 }
