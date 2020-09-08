@@ -1,11 +1,5 @@
 <template>
   <div id="contact-us" class="container-fluid">
-    <Message
-      v-if="message !== ''"
-      v-bind:message="message"
-      v-on:close="message = ''"
-    >
-    </Message>
     <div class="row">
       <form
         v-on:submit.prevent="submit"
@@ -27,7 +21,7 @@
         </div>
         <div
           v-if="$v.name.$dirty && $v.name.$invalid"
-          class="col-md-6 ml-auto mr-auto lead text-danger small"
+          class=" ml-auto mr-auto lead text-danger small"
         >
           * Please Enter Valid Name...
         </div>
@@ -46,7 +40,7 @@
         </div>
         <div
           v-if="$v.email.$dirty && $v.email.$invalid"
-          class="col-md-6 ml-auto mr-auto lead text-danger small"
+          class=" ml-auto mr-auto lead text-danger small"
         >
           * Please Enter Valid Email Address...
         </div>
@@ -67,7 +61,7 @@
         </div>
         <div
           v-if="$v.subject.$dirty && $v.subject.$invalid"
-          class="col-md-6 ml-auto mr-auto lead text-danger small"
+          class=" ml-auto mr-auto lead text-danger small"
         >
           * Subject must atleast 20 character long...
         </div>

@@ -33,25 +33,32 @@ export default {
 
   methods: {
     submit () {
-      const data = {
-        name: this.name,
-        emailId: this.email,
-        subject: this.subject
-      }
-
       if (this.$v.$invalid) {
-        this.message = {
+        // Show message to User
+        this.$emit('message', {
           title: 'Please Enter Valid details',
           body: 'Make sure email is correct'
-        }
+        })
       } else {
+        const data = {
+          name: this.name,
+          emailId: this.email,
+          subject: this.subject
+        }
+
         // Reset Vuelidate
         this.$v.$reset()
+        this.name = ''
+        this.email = ''
+        this.subject = ''
 
         axios.post(process.env.VUE_APP_BACK_END + '/contact-us', data)
           .then(response => {
-            console.log('Contact-us')
-            console.log(response)
+            // Show message to User
+            this.$emit('message', {
+              title: 'Successfully submitted the details',
+              body: 'We will contact you shortly...'
+            })
           })
       }
     }

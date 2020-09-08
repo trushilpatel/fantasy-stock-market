@@ -1,18 +1,28 @@
 <template>
   <div id="app" class="d-flex flex-column">
-    <Header > </Header>
-    <router-view />
-    <Footer > </Footer>
+    <Message
+      v-if="message !== ''"
+      v-bind:message="message"
+      v-on:close="message = ''"
+    >
+    </Message>
+    <Header> </Header>
+    <router-view v-on:message="message = $event"/>
+    <Footer v-on:message="message = $event"> </Footer>
   </div>
 </template>
 
 <script>
 import Header from './components/shared/Header/Header.component.vue'
 import Footer from './components/shared/Footer/Footer.component.vue'
+import Message from './components/shared/Message/Message.component.vue'
 
 export default {
   name: 'App',
-  components: { Header, Footer }
+  data () {
+    return { message: '' }
+  },
+  components: { Header, Footer, Message }
 }
 </script>
 <style>

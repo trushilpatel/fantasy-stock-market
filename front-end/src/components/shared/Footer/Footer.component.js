@@ -7,8 +7,7 @@ export default {
   components: { Message },
   data () {
     return {
-      subscriber_email: '',
-      message: ''
+      subscriber_email: ''
     }
   },
   validations: {
@@ -19,30 +18,35 @@ export default {
   },
   methods: {
     submit: function () {
-      const data = {
-        emailId: this.subscriber_email
-      }
-      console.log(this.$v.subscriber_email)
       if (this.$v.subscriber_email.$invalid) {
-        this.message = {
+        const message = {
           title: 'Enter Valid Email id',
           body: 'Please check entered email id'
         }
+        // Show message to User
+        this.$emit('message', message)
       } else {
+        const data = {
+          emailId: this.subscriber_email
+        }
+        // Reset Vuelidate
+        this.$v.$reset()
+        this.subscriber_email = ''
+
         axios.post(process.env.VUE_APP_BACK_END + '/newsletter_subscriber', data,
           {
             headers: {
               'Access-Control-Allow-Origin': process.env.VUE_APP_BACK_END
             }
           }
-        )
-          .then(response => {
-            this.message = {
-              title: 'Thank You For Subscribing to our Newsletters',
-              body: this.subscriber_email + ' is successfully subscribed'
-            }
-            console.log(this.message)
-          })
+        ).then(response => {
+          const message = {
+            title: 'Thank You For Subscribing to our Newsletters',
+            body: this.subscriber_email + ' is successfully subscribed'
+          }
+          // Show message to User
+          this.$emit('message', message)
+        })
       }
     }
   }
