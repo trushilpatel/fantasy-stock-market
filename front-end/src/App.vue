@@ -16,13 +16,20 @@
 import Header from './components/shared/Header/Header.component.vue'
 import Footer from './components/shared/Footer/Footer.component.vue'
 import Message from './components/shared/Message/Message.component.vue'
+import { mapGetters } from 'vuex'
+console.log()
 
 export default {
   name: 'App',
   data () {
     return { message: '' }
   },
-  components: { Header, Footer, Message }
+  components: { Header, Footer, Message },
+  computed: {
+    ...mapGetters(['user'])
+  },
+  mounted () {
+  }
 }
 </script>
 <style>
