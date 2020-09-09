@@ -1,7 +1,7 @@
 package com.FantasyStockMarket.FSM.Controllers.NewsletterSubscribers;
 
 import com.FantasyStockMarket.FSM.Entity.Newsletter_Subscribers.NewsletterSubscribers;
-import com.FantasyStockMarket.FSM.Response.Message;
+import com.FantasyStockMarket.FSM.Utils.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;

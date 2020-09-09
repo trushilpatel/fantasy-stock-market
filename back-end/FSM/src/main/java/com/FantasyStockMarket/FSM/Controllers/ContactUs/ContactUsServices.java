@@ -2,10 +2,9 @@ package com.FantasyStockMarket.FSM.Controllers.ContactUs;
 
 import com.FantasyStockMarket.FSM.Entity.ContactUs.ContactUs;
 import com.FantasyStockMarket.FSM.Entity.ContactUs.ContactUsRepository;
-import com.FantasyStockMarket.FSM.Response.Message;
+import com.FantasyStockMarket.FSM.Utils.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

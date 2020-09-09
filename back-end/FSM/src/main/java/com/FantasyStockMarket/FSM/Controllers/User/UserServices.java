@@ -2,8 +2,15 @@ package com.FantasyStockMarket.FSM.Controllers.User;
 
 import com.FantasyStockMarket.FSM.Entity.User.User;
 import com.FantasyStockMarket.FSM.Entity.User.UserRepository;
-import com.FantasyStockMarket.FSM.Response.Message;
-import com.FantasyStockMarket.FSM.Utils.PasswordManager;
+import com.FantasyStockMarket.FSM.Entity.UserJwtToken.UserJwtToken;
+import com.FantasyStockMarket.FSM.Entity.UserJwtToken.UserJwtTokenRepository;
+import com.FantasyStockMarket.FSM.Entity.UserSignInHistory.UserSignInHistory;
+import com.FantasyStockMarket.FSM.Entity.UserSignInHistory.UserSignInHistoryRepository;
+import com.FantasyStockMarket.FSM.Entity.UserSignOutHistory.UserSignOutHistory;
+import com.FantasyStockMarket.FSM.Entity.UserSignOutHistory.UserSignOutHistoryRepository;
+import com.FantasyStockMarket.FSM.Utils.Message;
+import com.FantasyStockMarket.FSM.Utils.JwtUtils;
+import com.FantasyStockMarket.FSM.Utils.UpdateUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,30 +20,89 @@ import java.util.List;
 @Service
 public class UserServices {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final JwtUtils jwtUtils;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserJwtTokenRepository userJwtTokenRepository;
+    private final UserSignInHistoryRepository userSignInHistoryRepository;
+    private final UserSignOutHistoryRepository userSignOutHistoryRepository;
 
     @Autowired
-    private PasswordManager passwordManager;
+    UserServices(UserRepository userRepository, UserJwtTokenRepository userJwtTokenRepository, JwtUtils jwtUtils,
+                 BCryptPasswordEncoder bCryptPasswordEncoder, UserSignOutHistoryRepository userSignOutHistoryRepository,
+                 UserSignInHistoryRepository userSignInHistoryRepository
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    ) {
+        this.userRepository = userRepository;
+        this.jwtUtils = jwtUtils;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.userJwtTokenRepository = userJwtTokenRepository;
+        this.userSignInHistoryRepository = userSignInHistoryRepository;
+        this.userSignOutHistoryRepository = userSignOutHistoryRepository;
+    }
 
     public List<User> getAllUser() {
         return userRepository.findAll();
     }
 
-    public Message saveUser(User user) {
+    public Object signUp(User user) {
+        /*
+            Return:
+                JwtToken on successful SignUp
+                Message on User Already Exist
+         */
+
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
+
         try {
             userRepository.save(user);
-            return new Message("successfully Signed up", "200");
+            UserJwtToken userJwtToken = jwtUtils.createJWT(user.getId(), user.getEmailId());
+            userSignInHistoryRepository.save(new UserSignInHistory(user.getId()));
+
+            return userJwtTokenRepository.save(userJwtToken);
+
         } catch (Exception userAlreadyExist) {
             return new Message(
-                    "User Already Exist",
+                    "User Already Exist Please Sign In",
                     "404"
             );
+        }
+    }
+
+    public Object signIn(User user) {
+        /*
+            Return:
+                JwtToken on successful SignUp
+                Message on User Already Exist
+         */
+
+        // Retrieving Existing User
+        User existUser = userRepository.findByEmailId(user.getEmailId());
+
+        if (existUser == null) {
+            // User Doesn't Exist
+
+            return new Message(
+                    "User Doesn't Exist Please Sign Up",
+                    "404"
+            );
+
+        } else if (bCryptPasswordEncoder.matches(user.getPassword(), existUser.getPassword())) {
+            // Check User Password
+
+            UserJwtToken userJwtToken = jwtUtils.createJWT(existUser.getId(), existUser.getEmailId());
+            userSignInHistoryRepository.save(new UserSignInHistory(existUser.getId()));
+
+            return userJwtTokenRepository.save(userJwtToken);
+        } else {
+            // User Entered invalid password
+            return new
+                    Message(
+                    "Please Enter Valid details ",
+                    "404"
+            );
+
         }
     }
 
@@ -46,6 +112,7 @@ public class UserServices {
 
             if (existUser != null && bCryptPasswordEncoder.matches(user.getPassword(), existUser.getPassword())) {
                 userRepository.deleteByEmailId(user.getEmailId());
+                userSignOutHistoryRepository.save(new UserSignOutHistory(user.getId()));
             } else {
                 return new Message(
                         "Please Enter Valid Email Id and Password ",
@@ -62,14 +129,27 @@ public class UserServices {
         );
     }
 
-    public Object updateUser(User user) {
+    public Object updateUser(UpdateUser tempUpdateUser) {
+        /*
+            Return:
+                JwtToken on successful UpdateUSer
+                Message on User Already Exist
+         */
+
         try {
-            User updatedUser = userRepository.findByEmailId(user.getEmailId());
+            System.out.println(tempUpdateUser);
+            User updatedUser = userRepository.findByEmailId(tempUpdateUser.getEmail());
 
-            updatedUser.setEmailId(user.getEmailId());
-            updatedUser.setPassword(user.getPassword());
+            updatedUser.setEmailId(tempUpdateUser.getEmail());
+            updatedUser.setPassword(bCryptPasswordEncoder.encode(tempUpdateUser.getPassword()));
 
-            return userRepository.save(updatedUser);
+            userRepository.save(updatedUser);
+
+            UserJwtToken userJwtToken = jwtUtils.createJWT(updatedUser.getId(), updatedUser.getEmailId());
+            userSignInHistoryRepository.save(new UserSignInHistory(updatedUser.getId()));
+
+            return userJwtTokenRepository.save(userJwtToken);
+
         } catch (Exception userIsNotExist) {
             return new Message(
                     "User Does Not Exist",
@@ -79,15 +159,20 @@ public class UserServices {
 
     }
 
-    public Message findUser(User user) {
-        User existUser = userRepository.findByEmailId(user.getEmailId());
+    public Object signOutUser(UserJwtToken userJwtToken) {
+        String email = jwtUtils.parseJWT(userJwtToken);
 
-        if (existUser != null && bCryptPasswordEncoder.matches(user.getPassword(), existUser.getPassword())) {
-            return new Message("successfully Logged In", "200");
+        try {
+            User user = userRepository.findByEmailId(email);
+            userSignOutHistoryRepository.save(new UserSignOutHistory(user.getId()));
+
+        } catch (Exception userNotExist) {
+
         }
+
         return new Message(
-                "User Does Not Exist",
-                "404"
+                "Successfully Sign Out",
+                "200"
         );
     }
 }

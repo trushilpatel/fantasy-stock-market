@@ -1,9 +1,12 @@
 package com.FantasyStockMarket.FSM.Controllers.User;
 
 import com.FantasyStockMarket.FSM.Entity.User.User;
-import com.FantasyStockMarket.FSM.Response.Message;
+import com.FantasyStockMarket.FSM.Entity.UserJwtToken.UserJwtToken;
+import com.FantasyStockMarket.FSM.Utils.JwtToken;
+import com.FantasyStockMarket.FSM.Utils.Message;
+import com.FantasyStockMarket.FSM.Utils.UpdateUser;
+import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,27 +20,49 @@ public class UserController {
     private UserServices userServices;
 
     @GetMapping("")
-    public List<User> getUsers(){
+    public List<User> getUsers() {
         return userServices.getAllUser();
     }
 
     @PostMapping("/sign-up")
-    public Message signUpUser(@RequestBody User user){
-        return userServices.saveUser(user);
+    public Object signUpUser(@RequestBody User user) {
+        /*
+            Return:
+                JwtToken on successful SignUp
+                Message on User Already Exist
+         */
+        return userServices.signUp(user);
     }
 
     @PostMapping("/sign-in")
-    public Message signInUser(@RequestBody User user){
-        return userServices.findUser(user);
+    public Object signInUser(@RequestBody User user) {
+        /*
+            Return:
+                JwtToken on successful SignUp
+                Message on User Already Exist
+         */
+        return userServices.signIn(user);
+    }
+
+    @PostMapping("/sign-out")
+    public Object signOutUser(@RequestBody UserJwtToken userJwtToken){
+        System.out.println("Sign out");
+        return userServices.signOutUser(userJwtToken);
     }
 
     @PatchMapping("")
-    public Object updateUser(@RequestBody User user){
-        return userServices.updateUser(user);
+    public Object updateUser(@RequestBody UpdateUser updateUser) {
+        /*
+            Return:
+                JwtToken on successful SignUp
+                Message on User Already Exist
+         */
+
+        return userServices.updateUser(updateUser);
     }
 
     @DeleteMapping("")
-    public Message deleteUser(@RequestBody User user){
+    public Message deleteUser(@RequestBody User user) {
         return userServices.deleteUser(user);
     }
 }

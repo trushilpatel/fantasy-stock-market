@@ -1,4 +1,4 @@
-package com.FantasyStockMarket.FSM.Response;
+package com.FantasyStockMarket.FSM.Utils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

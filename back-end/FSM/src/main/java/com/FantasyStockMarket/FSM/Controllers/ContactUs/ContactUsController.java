@@ -1,11 +1,10 @@
 package com.FantasyStockMarket.FSM.Controllers.ContactUs;
 
 import com.FantasyStockMarket.FSM.Entity.ContactUs.ContactUs;
-import com.FantasyStockMarket.FSM.Response.Message;
+import com.FantasyStockMarket.FSM.Utils.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController

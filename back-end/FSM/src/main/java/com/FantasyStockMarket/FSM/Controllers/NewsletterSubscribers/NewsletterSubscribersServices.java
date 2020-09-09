@@ -2,13 +2,9 @@ package com.FantasyStockMarket.FSM.Controllers.NewsletterSubscribers;
 
 import com.FantasyStockMarket.FSM.Entity.Newsletter_Subscribers.NewsletterSubscribers;
 import com.FantasyStockMarket.FSM.Entity.Newsletter_Subscribers.NewsletterSubscribersRepository;
-import com.FantasyStockMarket.FSM.Response.Message;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import com.FantasyStockMarket.FSM.Utils.Message;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.List;
