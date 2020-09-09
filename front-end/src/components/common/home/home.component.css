@@ -1,0 +1,33 @@
+#home {}
+
+header {
+  background: url('../../../assets/images/2.jpg') !important;
+  background-attachment: fixed;
+}
+
+.darkOverLay {
+  background: rgba(0, 0, 0, 0.6)
+}
+
+.text-gradient {
+  background: -webkit-linear-gradient(rgb(53, 207, 112), rgb(54, 175, 216), rgb(184, 209, 42));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-green {
+  color: rgb(113, 219, 184);
+  border-color: rgb(108, 221, 183) !important;
+  border-width: 0.5rem !important;
+}
+
+.text-gray {
+  color: rgb(99, 190, 190);
+}
+
+.text-blue {
+  color: rgb(155, 230, 43);
+  border-color: rgb(140, 207, 39) !important;
+  border-width: 0.5rem !important;
+
+}

@@ -2,7 +2,7 @@
   <div id="about" class="container-fluid  pb-5">
     <div class="ml-auto mr-auto">
       <div
-        class="border-bottom display-4 border-dark text-center  ml-auto mr-auto text-dark"
+        class="font-weight-bold pt-4 border-bottom display-4 border-dark text-center  ml-auto mr-auto text-dark"
       >
         About Us
       </div>
@@ -12,7 +12,7 @@
           class="card col-md-6 ml-auto mr-auto p-0 shadow-lg text-center bg-dark"
         >
           <img
-            src="../../assets/trushilpatel.jpg"
+            src="@/assets/trushilpatel.jpg"
             alt="Trushil Patel"
             class="my-3 card-img-top w-50 h-50 ml-auto  mr-auto mb-0 rounded-circle "
           />
@@ -24,7 +24,7 @@
               <span class="d-block lead small py-3 text-small">
                 Creator Of FSM
                 <img
-                  src="../../assets/FSM.png"
+                  src="@/assets/FSM.png"
                   class="ml-2"
                   height="20px"
                   width="20px"

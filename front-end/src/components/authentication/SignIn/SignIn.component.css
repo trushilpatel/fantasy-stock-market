@@ -1,0 +1,11 @@
+#login {
+  background-image: linear-gradient(to bottom right,rgb(70, 156, 182), yellow);
+  background-position: fixed;
+  margin: 0;
+  padding: 0;
+  background-repeat: repeat-y;
+}
+
+.bg-gray {
+  background-color: rgba(139, 139, 139, 0.733);
+}

@@ -1,3 +1,26 @@
+import axios from 'axios'
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'Header'
+  name: 'Header',
+  data () {
+    return {
+
+    }
+  },
+  computed: {
+    ...mapGetters(['user']),
+    isAuthenticated: function () {
+      console.log(this.user)
+      return this.user.token.trim() !== ''
+    }
+  },
+  methods: {
+    signOut () {
+      axios.post(process.env.VUE_APP_BACK_END + '/user/sign-out', this.user)
+      this.$store.commit('signOut')
+      console.log(this.user)
+      this.$router.push('/')
+    }
+  }
 }

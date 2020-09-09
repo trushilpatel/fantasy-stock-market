@@ -1,6 +1,6 @@
 import { required, email, alpha, minLength } from 'vuelidate/lib/validators'
 import axios from 'axios'
-import Message from '../shared/Message/Message.component.vue'
+import Message from '@/components/shared/Message/Message.component.vue'
 
 export default {
   name: 'ContactUs',
