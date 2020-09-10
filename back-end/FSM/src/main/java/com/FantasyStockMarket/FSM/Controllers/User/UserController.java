@@ -43,8 +43,7 @@ public class UserController {
     }
 
     @PostMapping("/sign-out")
-    public Object signOutUser(@RequestBody UserJwtToken userJwtToken){
-        System.out.println("Sign out");
+    public Object signOutUser(@RequestBody UserJwtToken userJwtToken) {
         return userServices.signOutUser(userJwtToken);
     }
 
@@ -59,7 +58,7 @@ public class UserController {
         return userServices.updateUser(updateUser);
     }
 
-    @DeleteMapping("")
+    @PostMapping("/delete")
     public Message deleteUser(@RequestBody User user) {
         return userServices.deleteUser(user);
     }

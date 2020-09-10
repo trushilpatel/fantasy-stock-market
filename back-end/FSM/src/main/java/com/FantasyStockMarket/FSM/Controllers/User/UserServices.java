@@ -109,10 +109,15 @@ public class UserServices {
     public Message deleteUser(User user) {
         try {
             User existUser = userRepository.findByEmailId(user.getEmailId());
-
+            System.out.println(user);
+            System.out.println(existUser);
             if (existUser != null && bCryptPasswordEncoder.matches(user.getPassword(), existUser.getPassword())) {
+                System.out.println("1");
                 userRepository.deleteByEmailId(user.getEmailId());
+                System.out.println("2");
                 userSignOutHistoryRepository.save(new UserSignOutHistory(user.getId()));
+
+                System.out.println("Delete Account");
             } else {
                 return new Message(
                         "Please Enter Valid Email Id and Password ",
@@ -120,9 +125,9 @@ public class UserServices {
                 );
             }
         } catch (Exception userNotExist) {
+            System.out.println("Exception in Delete Account");
 
         }
-
         return new Message(
                 "Successfully Removed " + user.getEmailId(),
                 "202"
