@@ -2,10 +2,8 @@ package com.FantasyStockMarket.FSM.Controllers.User;
 
 import com.FantasyStockMarket.FSM.Entity.User.User;
 import com.FantasyStockMarket.FSM.Entity.UserJwtToken.UserJwtToken;
-import com.FantasyStockMarket.FSM.Utils.JwtToken;
 import com.FantasyStockMarket.FSM.Utils.Message;
 import com.FantasyStockMarket.FSM.Utils.UpdateUser;
-import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

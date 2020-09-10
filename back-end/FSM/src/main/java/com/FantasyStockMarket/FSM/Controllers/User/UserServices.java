@@ -137,18 +137,27 @@ public class UserServices {
          */
 
         try {
-            System.out.println(tempUpdateUser);
             User updatedUser = userRepository.findByEmailId(tempUpdateUser.getEmail());
 
-            updatedUser.setEmailId(tempUpdateUser.getEmail());
-            updatedUser.setPassword(bCryptPasswordEncoder.encode(tempUpdateUser.getPassword()));
+            if (bCryptPasswordEncoder.matches(tempUpdateUser.getPassword(), updatedUser.getPassword())) {
+                // validating old password
 
-            userRepository.save(updatedUser);
+                updatedUser.setEmailId(tempUpdateUser.getEmail());
+                updatedUser.setPassword(bCryptPasswordEncoder.encode(tempUpdateUser.getNewPassword()));
 
-            UserJwtToken userJwtToken = jwtUtils.createJWT(updatedUser.getId(), updatedUser.getEmailId());
-            userSignInHistoryRepository.save(new UserSignInHistory(updatedUser.getId()));
+                userRepository.save(updatedUser);
 
-            return userJwtTokenRepository.save(userJwtToken);
+                UserJwtToken userJwtToken = jwtUtils.createJWT(updatedUser.getId(), updatedUser.getEmailId());
+                userSignInHistoryRepository.save(new UserSignInHistory(updatedUser.getId()));
+
+                return userJwtTokenRepository.save(userJwtToken);
+            } else {
+                return new Message(
+                        "Enter Valid Details",
+                        "401"
+                );
+            }
+
 
         } catch (Exception userIsNotExist) {
             return new Message(
