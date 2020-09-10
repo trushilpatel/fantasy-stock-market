@@ -1,12 +1,17 @@
 package com.FantasyStockMarket.FSM.Entity.User;
 
+import com.FantasyStockMarket.FSM.Entity.UserJwtToken.UserJwtToken;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -30,7 +35,6 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "joined_date", insertable = false)
     Timestamp joinedDate;
-
 
     public Long getId() {
         return id;
@@ -66,11 +70,12 @@ public class User {
 
     @Override
     public String toString() {
-        return "user{" +
+        return "User{" +
                 "id=" + id +
-                ", email_id='" + emailId + '\'' +
+                ", emailId='" + emailId + '\'' +
                 ", password='" + password + '\'' +
-                ", joined_date='" + joinedDate + '\'' +
+                ", joinedDate=" + joinedDate +
                 '}';
     }
+
 }

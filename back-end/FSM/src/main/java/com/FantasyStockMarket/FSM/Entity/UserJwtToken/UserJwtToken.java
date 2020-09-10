@@ -1,6 +1,7 @@
 package com.FantasyStockMarket.FSM.Entity.UserJwtToken;
 
 
+import com.FantasyStockMarket.FSM.Entity.User.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.stereotype.Component;
 
@@ -24,12 +25,13 @@ public class UserJwtToken {
     @Column(name = "jwt_token")
     String token;
 
-    @Column(name = "sign_in_timestamp", insertable = false)
+    @Column(name = "sign_in_timestamp", insertable = false, updatable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     Timestamp signInTimestamp;
 
     public UserJwtToken() {
     }
+
 
     public UserJwtToken(Long userId, String jwtToken) {
         this.userId = userId;
@@ -73,7 +75,7 @@ public class UserJwtToken {
         return "UserJwtToken{" +
                 "id=" + id +
                 ", userId=" + userId +
-                ", jwtToken='" + token + '\'' +
+                ", token='" + token + '\'' +
                 ", signInTimestamp=" + signInTimestamp +
                 '}';
     }
