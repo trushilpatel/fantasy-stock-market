@@ -11,7 +11,6 @@ export default {
   computed: {
     ...mapGetters(['user']),
     isAuthenticated: function () {
-      console.log(this.user)
       return this.user.token.trim() !== ''
     }
   },

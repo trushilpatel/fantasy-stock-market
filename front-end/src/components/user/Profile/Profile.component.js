@@ -44,10 +44,12 @@ export default {
   methods: {
     submit () {
       if (this.$v.$invalid) {
-        this.message = {
+        const message = {
           title: 'Enter Valid Details',
-          body: 'Please Make sure email is correct and both the passwords are same'
+          body: 'Please Make sure email is correct and both the passwords are different'
         }
+
+        this.$emit('message', message)
       } else {
         const data = {
           email: this.email,
@@ -75,6 +77,34 @@ export default {
             console.log(err)
           })
       }
+    },
+    deleteAccount () {
+      const promptValue = prompt(' Enter your password to delete Account')
+
+      const data = { emailId: this.email, password: promptValue }
+      console.log(data)
+
+      axios.post('http://localhost:8080/user/delete', data
+      )
+        .then(response => {
+          // Check For Message Sent By server
+          console.log(response)
+          this.$emit('message', {
+            title: response.data.statusCode,
+            body: response.data.message
+          })
+          if (response.data.message.statusCode === '202') {
+            this.$store.commit('signIn', { token: '' })
+            this.$store.commit('saveEmail', '')
+            // Successfully Deleted account and Logged Out
+            this.$router.push('/user/home')
+          } else {
+          }
+        })
+        .catch(err => {
+          console.log('Error Occurred')
+          console.log(err)
+        })
     }
   }
 }

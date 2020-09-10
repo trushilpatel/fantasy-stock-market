@@ -17,6 +17,11 @@ export default {
   computed: {
     ...mapState(['User'])
   },
+  mounted: function () {
+    if (this.$store.state.User.user.token !== '') {
+      this.$router.push('/user/home')
+    }
+  },
   validations: {
     email: {
       required,
@@ -26,7 +31,6 @@ export default {
       required,
       strongPassword () {
         const passwordMatcher = new RegExp(passwordRegex)
-        console.log(passwordMatcher.test(this.password))
         return passwordMatcher.test(this.password)
       }
     }

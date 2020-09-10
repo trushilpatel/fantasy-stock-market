@@ -99,9 +99,28 @@
           </span>
         </div>
         <div>
-          <router-link to="/" class="d-block">Home</router-link>
-          <router-link to="/Contact-us" class="d-block">Contact Us</router-link>
-          <router-link to="/about" class="d-block">About</router-link>
+          <template v-if="isAuthenticated">
+            <router-link to="/user/home" class="d-block">Home</router-link>
+            <router-link to="/user/my-watch-list" class="d-block"
+              >My Watch List</router-link
+            >
+            <router-link to="/user/buy-sell" class="d-block"
+              >Buy/Sell</router-link
+            >
+            <router-link to="/user/transactions" class="d-block"
+              >Transactions</router-link
+            >
+            <router-link to="/user/profile" class="d-block"
+              >Profile</router-link
+            >
+          </template>
+          <template v-else>
+            <router-link to="/" class="d-block">Home</router-link>
+            <router-link to="/contact-us" class="d-block"
+              >Contact Us</router-link
+            >
+            <router-link to="/about" class="d-block">About</router-link>
+          </template>
         </div>
       </div>
     </div>

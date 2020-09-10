@@ -18,6 +18,11 @@ export default {
       required,
       email
     },
+    mounted: function () {
+      if (this.$store.state.User.user.token !== '') {
+        this.$router.push('/user/home')
+      }
+    },
     password: {
       required,
       strongPassword () {

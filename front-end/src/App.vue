@@ -6,8 +6,8 @@
       v-on:close="message = ''"
     >
     </Message>
-    <Header> </Header>
-    <router-view v-on:message="message = $event"/>
+    <Header class="fixed-top mb-5"> </Header>
+    <router-view v-on:message="message = $event" class="pt-5 "/>
     <Footer v-on:message="message = $event"> </Footer>
   </div>
 </template>

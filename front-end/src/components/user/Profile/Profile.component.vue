@@ -1,12 +1,13 @@
 <template>
   <div class="container-fluid pb-5">
-    <div class="col-12 text-center display-4 border-bottom">Profile</div>
-
     <div class="col-md-8  ml-auto mr-auto">
       <div class="mr-auto ml-auto">
         <form v-on:submit.prevent="submit()" class="mt-auto mb-auto">
           <div class="my-4 mb-5">
-            <div class="form-group mt-5 border p-3 border-dark shadow-lg">
+            <div class="form-group mt-5 shadow-lg">
+              <div class="bg-dark text-white py-2 mb-5 text-center display-4 border-bottom">
+                Profile
+              </div>
               <div class="input-group my-3 col-10 ml-auto mr-auto">
                 <span
                   class="input-group-text bg-dark text-white border-dark border-0 rounded-0"
@@ -28,7 +29,7 @@
               >
                 * Please enter valid email address...
               </div>
-              <div class="col-10 border p-4 ml-auto mr-auto my-4">
+              <div class="col-10 border-top border-bottom p-4 ml-auto mr-auto my-5">
                 <div class="font-weight-bold">Update Password</div>
                 <div class="input-group my-4">
                   <span
@@ -72,25 +73,27 @@
                   v-if="$v.newPassword.$dirty && $v.newPassword.$invalid"
                   class="ml-auto mr-auto lead text-danger small"
                 >
-                  * Password must be 8 character long (should contain small
-                  alphabet, capital alphabet,one number)
+                  * Password must be different and 8 character long (should
+                  contain small alphabet, capital alphabet,one number)
                 </div>
               </div>
 
-              <div class="mt-4 mb-4">
+              <div class="mt-4 ">
                 <button
                   type="submit"
-                  class=" col-10 form-control btn btn-block btn-primary ml-auto mr-auto px-0 border-0 rounded-0"
+                  class=" py-3 btn btn-block btn-primary ml-auto mr-auto px-0 border-0 rounded-0 font-weight-bold "
+                  style="font-size: 1.5rem;"
                 >
                   Save
                 </button>
               </div>
-              <div class="mt-4 mb-4">
+              <div class="mt-4 mb-4 d-none">
                 <button
-                  type="submit"
-                  class=" col-10 form-control btn btn-block btn-primary ml-auto mr-auto px-0 border-0 rounded-0"
+                  type="button"
+                  v-on:click="deleteAccount()"
+                  class=" col-10 form-control btn btn-block btn-danger ml-auto mr-auto px-0 border-0 rounded-0"
                 >
-                  Save
+                  Delete Account
                 </button>
               </div>
             </div>

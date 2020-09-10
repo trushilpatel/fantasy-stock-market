@@ -1,6 +1,7 @@
 import { required, email } from 'vuelidate/lib/validators'
 import axios from 'axios'
 import Message from '../Message/Message.component.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Footer',
@@ -8,6 +9,12 @@ export default {
   data () {
     return {
       subscriber_email: ''
+    }
+  },
+  computed: {
+    ...mapGetters(['user']),
+    isAuthenticated: function () {
+      return this.user.token.trim() !== ''
     }
   },
   validations: {

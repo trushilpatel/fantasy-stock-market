@@ -1,17 +1,25 @@
 <template>
-  <div id="login" class="container-fluid pb-5">
+  <div id="sign-up" class="container-fluid pb-5">
     <div class=" pt-md-5">
       <form
         v-on:submit.prevent="submit()"
-        class="col-md-5 ml-auto mr-auto border border-dark p-4 shadow mt-auto mb-auto"
+        class="col-md-5 ml-auto mr-auto shadow mt-auto mb-auto p-0"
       >
-        <div class=" text-center font-weight-bolder">
-          <div class="lead display-4 ">FSM</div>
+        <div class="bg-dark text-white py-3 text-center font-weight-bolder">
+          <div class="lead display-4 ">
+            <img
+              src="@/assets/FSM.png"
+              height="70rem"
+              width="70rem"
+              class="mr-3"
+            />
+            FSM
+          </div>
         </div>
 
-        <div class="my-4 mb-5">
-          <div class="form-group mt-5 border p-3 border-dark shadow-lg">
-            <div class="input-group my-3">
+        <div class="my-4 mb-5 mx-5">
+          <div class="form-group mt-5 pt-3 border-dark shadow-lg">
+            <div class="input-group my-3 px-3">
               <span
                 class="input-group-text bg-dark text-white border-dark border-0 rounded-0"
               >
@@ -32,7 +40,7 @@
             >
               * Please enter valid email address...
             </div>
-            <div class="input-group my-4">
+            <div class="input-group my-4 px-3">
               <span
                 class="input-group-text bg-dark text-white border-dark border-right-0 border-0 rounded-0"
               >
@@ -51,9 +59,10 @@
               v-if="$v.password.$dirty && $v.password.$invalid"
               class="ml-auto mr-auto lead text-danger small"
             >
-              * Password must be 8 character long (should contain small alphabet, capital alphabet,one number)
+              * Password must be 8 character long (should contain small
+              alphabet, capital alphabet,one number)
             </div>
-            <div class="input-group my-4">
+            <div class="input-group my-4 px-3">
               <span
                 class="input-group-text bg-dark text-white border-dark border-right-0 border-0 rounded-0"
               >
@@ -72,12 +81,12 @@
               v-if="$v.confirmPassword.$dirty && $v.confirmPassword.$invalid"
               class="ml-auto mr-auto lead text-danger small"
             >
-              * Both the Password should match...
+              * Both Password must match...
             </div>
-            <div class="mt-4 mb-4">
+            <div class="mt-4 ">
               <button
                 type="submit"
-                class="form-control btn btn-block btn-primary ml-auto mr-auto px-0 border-0 rounded-0"
+                class="py-3 btn btn-block btn-primary ml-auto mr-auto px-0 border-0 rounded-0"
               >
                 Sign Up
               </button>
@@ -85,21 +94,13 @@
           </div>
         </div>
 
-        <div class=" my-3 ">
+        <div class=" mt-3 ">
           <button
             type="submit"
-            class="btn btn-block btn-success border-0 rounded-0"
+            class="py-3 btn btn-block btn-success border-0 rounded-0"
             v-on:click="$router.push('/sign-in')"
           >
             Sign In
-          </button>
-
-          <button
-            type="submit"
-            class="btn btn-block btn-danger border-0 rounded-0 "
-            data-onsuccess="onSignIn"
-          >
-            Sign Up With Google
           </button>
         </div>
       </form>
