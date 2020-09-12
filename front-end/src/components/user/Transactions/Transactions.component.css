@@ -1,0 +1,13 @@
+.sell {
+  background-color: rgb(255, 197, 197) !important;
+}
+
+thead {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+}
+
+.buy {
+  background-color: rgb(185, 255, 185) !important;
+}
