@@ -96,7 +96,6 @@
 
         <div class=" mt-3 ">
           <button
-            type="submit"
             class="py-3 btn btn-block btn-success border-0 rounded-0"
             v-on:click="$router.push('/sign-in')"
           >

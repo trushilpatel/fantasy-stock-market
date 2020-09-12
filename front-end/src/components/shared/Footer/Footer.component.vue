@@ -104,9 +104,9 @@
             <router-link to="/user/my-watch-list" class="d-block"
               >My Watch List</router-link
             >
-            <router-link to="/user/buy-sell" class="d-block"
+            <!-- <router-link to="/user/buy-sell" class="d-block"
               >Buy/Sell</router-link
-            >
+            > -->
             <router-link to="/user/transactions" class="d-block"
               >Transactions</router-link
             >

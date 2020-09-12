@@ -5,11 +5,10 @@ export default {
   name: 'Header',
   data () {
     return {
-
     }
   },
   computed: {
-    ...mapGetters(['user']),
+    ...mapGetters(['user', 'email']),
     isAuthenticated: function () {
       return this.user.token.trim() !== ''
     }
@@ -21,5 +20,6 @@ export default {
       console.log(this.user)
       this.$router.push('/')
     }
+
   }
 }

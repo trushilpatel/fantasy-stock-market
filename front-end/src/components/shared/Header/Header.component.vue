@@ -10,6 +10,12 @@
       <div class="navbar">
         <!-- Sign In/Sign Up When Toggler is Open -->
         <ul class="navbar-nav mr-3 d-block d-md-none">
+          <li
+            v-if="isAuthenticated"
+            class="nav-item text-white border border-white px-2 py-1"
+          >
+            $ {{ $store.state.User.amount }}
+          </li>
           <li class="nav-item">
             <router-link
               v-if="!isAuthenticated"
@@ -49,7 +55,6 @@
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
-
       <!-- Navigation Links -->
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
@@ -65,11 +70,11 @@
                 >My Watch List</router-link
               >
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <router-link to="/user/buy-sell" exact class="nav-link"
                 >Buy/Sell</router-link
               >
-            </li>
+            </li> -->
             <li class="nav-item">
               <router-link to="/user/transactions" exact class="nav-link"
                 >Transactions</router-link
@@ -123,6 +128,13 @@
             >
           </li>
         </ul>
+      </div>
+      <div class="navbar ml-0 mr-0 d-md-inline-block d-none">
+        <div v-if="isAuthenticated" class="navbar-nav d-block">
+          <li class="nav-item text-white border border-white px-2 py-1">
+            $ {{ $store.state.User.amount }}
+          </li>
+        </div>
       </div>
       <div class="navbar ml-0 mr-0 d-md-inline-block d-none">
         <ul class="navbar-nav d-block">

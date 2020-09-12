@@ -57,6 +57,7 @@ export default {
                 body: response.data.message
               })
             } else {
+              this.getBalance()
               this.$store.commit('signIn', response.data)
               this.$store.commit('saveEmail', this.email)
               // Successfully Logged in
@@ -68,6 +69,14 @@ export default {
             console.log(err)
           })
       }
+    },
+    getBalance () {
+      axios.post(process.env.VUE_APP_BACK_END + '/user/account-balance', { emailId: this.email }).then(
+        response => {
+          console.log(response.data)
+          this.$store.commit('setBalance', response.data.amount)
+        }
+      )
     }
   }
 }

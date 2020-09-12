@@ -13,15 +13,15 @@ export default {
       message: ''
     }
   },
+  mounted: function () {
+    if (this.$store.state.User.user.token !== '') {
+      this.$router.push('/user/home')
+    }
+  },
   validations: {
     email: {
       required,
       email
-    },
-    mounted: function () {
-      if (this.$store.state.User.user.token !== '') {
-        this.$router.push('/user/home')
-      }
     },
     password: {
       required,
@@ -40,6 +40,8 @@ export default {
   },
   methods: {
     submit () {
+      console.log("it's working")
+      console.log(this.$v)
       if (this.$v.$invalid) {
         this.message = {
           title: 'Enter Valid Details',
@@ -60,9 +62,8 @@ export default {
                 body: response.data.message
               })
             } else {
+              this.newUserBalance()
               this.$store.commit('signIn', response.data)
-              // Successfully Signed Up
-              this.$router.push('/user/home')
             }
           })
           .catch(err => {
@@ -70,6 +71,27 @@ export default {
             console.log(err)
           })
       }
+    },
+    newUserBalance () {
+      axios.post(process.env.VUE_APP_BACK_END + '/user/new-user-balance', { emailId: this.email })
+        .then(response => {
+        // Check For Message Sent By server
+          if (response.data.message) {
+            this.$emit('message', {
+              title: response.data.statusCode,
+              body: response.data.message
+            })
+          } else {
+            this.$store.commit('setBalance', response.data.amount)
+
+            // Successfully Signed Up
+            this.$router.push('/user/home')
+          }
+        })
+        .catch(err => {
+          console.log('Error Occurred')
+          console.log(err)
+        })
     }
   }
 }
