@@ -1,5 +1,5 @@
 // Replace key with your API key
-const alpha = require('alphavantage')({ key: 'qweqweqwe' });
+const alpha = require('alphavantage')({ key: 'qweqweqwe2' });
 
 async function intradaySymbol(req,res){
   const response = await alpha.data.intraday(req.params.symbol)
