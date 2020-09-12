@@ -4,7 +4,8 @@ export default {
       user: {
         token: ''
       },
-      email: ''
+      email: '',
+      amount: 0
     }
   },
   getters: {
@@ -13,6 +14,9 @@ export default {
     },
     email (state) {
       return state.email
+    },
+    balance (state) {
+      return state.amount
     }
   },
   mutations: {
@@ -24,6 +28,9 @@ export default {
     },
     saveEmail (state, payload) {
       state.email = payload
+    },
+    setBalance (state, amount) {
+      state.amount = amount
     }
   },
   actions: {}
