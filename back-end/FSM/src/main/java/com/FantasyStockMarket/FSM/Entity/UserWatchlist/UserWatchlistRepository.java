@@ -1,6 +1,10 @@
 package com.FantasyStockMarket.FSM.Entity.UserWatchlist;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-public interface UserWatchlistRepository extends JpaRepository {
+@Repository
+@Transactional
+public interface UserWatchlistRepository extends JpaRepository<UserWatchlist, Long> {
 }

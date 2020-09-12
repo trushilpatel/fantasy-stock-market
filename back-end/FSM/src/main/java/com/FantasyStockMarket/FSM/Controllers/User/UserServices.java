@@ -1,5 +1,6 @@
 package com.FantasyStockMarket.FSM.Controllers.User;
 
+import com.FantasyStockMarket.FSM.Controllers.UserAccount.UserAccountServices;
 import com.FantasyStockMarket.FSM.Entity.User.User;
 import com.FantasyStockMarket.FSM.Entity.User.UserRepository;
 import com.FantasyStockMarket.FSM.Entity.UserJwtToken.UserJwtToken;
@@ -20,26 +21,19 @@ import java.util.List;
 @Service
 public class UserServices {
 
-    private final UserRepository userRepository;
-    private final JwtUtils jwtUtils;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final UserJwtTokenRepository userJwtTokenRepository;
-    private final UserSignInHistoryRepository userSignInHistoryRepository;
-    private final UserSignOutHistoryRepository userSignOutHistoryRepository;
-
     @Autowired
-    UserServices(UserRepository userRepository, UserJwtTokenRepository userJwtTokenRepository, JwtUtils jwtUtils,
-                 BCryptPasswordEncoder bCryptPasswordEncoder, UserSignOutHistoryRepository userSignOutHistoryRepository,
-                 UserSignInHistoryRepository userSignInHistoryRepository
+    private UserRepository userRepository;
+    @Autowired
+    private JwtUtils jwtUtils;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private UserJwtTokenRepository userJwtTokenRepository;
+    @Autowired
+    private UserSignInHistoryRepository userSignInHistoryRepository;
+    @Autowired
+    private UserSignOutHistoryRepository userSignOutHistoryRepository;
 
-    ) {
-        this.userRepository = userRepository;
-        this.jwtUtils = jwtUtils;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.userJwtTokenRepository = userJwtTokenRepository;
-        this.userSignInHistoryRepository = userSignInHistoryRepository;
-        this.userSignOutHistoryRepository = userSignOutHistoryRepository;
-    }
 
     public List<User> getAllUser() {
         return userRepository.findAll();

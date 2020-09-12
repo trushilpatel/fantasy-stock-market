@@ -1,5 +1,6 @@
 package com.FantasyStockMarket.FSM.Entity.UserWatchlist;
 
+import com.FantasyStockMarket.FSM.Entity.User.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -13,11 +14,21 @@ public class UserWatchlist {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     Long id;
 
-    @Column(name = "user_id")
-    String userId;
-
     @Column(name = "symbol")
     String symbol;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public UserWatchlist() {
     }
@@ -28,14 +39,6 @@ public class UserWatchlist {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getSymbol() {
@@ -50,7 +53,6 @@ public class UserWatchlist {
     public String toString() {
         return "UserWatchlist{" +
                 "id=" + id +
-                ", userId='" + userId + '\'' +
                 ", symbol='" + symbol + '\'' +
                 '}';
     }
