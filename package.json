@@ -1,0 +1,23 @@
+{
+  "name": "fantasy-stock-market",
+  "version": "1.0.0",
+  "description": "Fantasy stock market Game based on real stock market data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publishFrontEnd": "git subtree push --prefix front-end heroku-vue master",
+    "publishBackEndJava": "git subtree push --prefix back-end/FSM heroku-java master"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trushilpatel9898/fantasy-stock-market.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trushilpatel9898/fantasy-stock-market/issues"
+  },
+  "homepage": "https://github.com/trushilpatel9898/fantasy-stock-market#readme"
+}
