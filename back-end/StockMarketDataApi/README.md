@@ -1,4 +1,5 @@
-# front-end
+# NodeJS BackEnd
+Serves REST APIs, For Stock Market data
 
 ## Add your AlphaVantage API key In following file
 ```
