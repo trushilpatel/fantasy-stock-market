@@ -66,8 +66,6 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
-
-
     </dependencies>
 
     <build>
@@ -80,6 +78,9 @@
                 <groupId>com.heroku.sdk</groupId>
                 <artifactId>heroku-maven-plugin</artifactId>
                 <version>3.0.3</version>
+                <configuration>
+                    <appName>FSM</appName>
+                </configuration>
             </plugin>
         </plugins>
     </build>
