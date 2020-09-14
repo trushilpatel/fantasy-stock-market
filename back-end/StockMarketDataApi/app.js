@@ -9,11 +9,6 @@ const StockMarketRouter = require('./src/StockMarket/StockMarket.router')
 
 app.use('/api',cors(), StockMarketRouter )
 
-app.get('/', (req,res)=>{
-  console.log(req.data)
-  res.json(req)
-//  res.send('dklfaslasdf')
-})
 app.all('*', (req,res)=>{
   res.json({
     error: '404'
