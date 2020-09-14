@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "\"user\"")
 @Component
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
@@ -42,6 +42,7 @@ public class User {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     UserAccount userAccount;
+
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<UserWatchlist> userWatchlist;
