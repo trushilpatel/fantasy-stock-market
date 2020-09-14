@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 
 const app = express()
-const port = 3000
+const PORT = process.env.PORT || 3000;
 
 const StockMarketRouter = require('./src/StockMarket/StockMarket.router')
 
