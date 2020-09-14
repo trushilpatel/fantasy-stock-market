@@ -1,7 +1,7 @@
 import { required, email } from 'vuelidate/lib/validators'
 import axios from 'axios'
 
-const passwordRegex = /^[A-Za-z0-9]\w{7,14}$/
+const passwordRegex = /^[A-Za-z0-9!@#$&*]\w{7,14}$/
 
 export default {
   name: 'SignUp',
