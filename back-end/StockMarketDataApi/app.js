@@ -20,5 +20,5 @@ app.all('*', (req,res)=>{
   })
 })
 app.listen(PORT,()=>{
-  console.log('Stock Market Data is listening on : http://localhost:' + port)
+  console.log('Stock Market Data is listening on : http://localhost:' + PORT)
 })
