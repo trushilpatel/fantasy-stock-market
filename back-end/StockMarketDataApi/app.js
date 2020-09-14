@@ -19,6 +19,6 @@ app.all('*', (req,res)=>{
     error: '404'
   })
 })
-app.listen(port,()=>{
+app.listen(PORT,()=>{
   console.log('Stock Market Data is listening on : http://localhost:' + port)
 })
