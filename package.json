@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "publishFrontEnd": "git subtree push --prefix front-end heroku-vue master",
-    "publishBackEndJava": "git subtree push --prefix back-end/FSM heroku-java master"
-
+    "publishBackEndJava": "git subtree push --prefix back-end/FSM heroku-java master",
+    "publishBackEndNode": "git subtree push --prefix back-end/StockMarketDataApi heroku-node master"
   },
   "repository": {
     "type": "git",
