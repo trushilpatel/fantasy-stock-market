@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar target/heroku-demo-0.0.1-SNAPSHOT.jar -Dserver.port=$PORT $JAR_OPTS
+java $JAVA_OPTS -jar target/FSM-0.0.1-SNAPSHOT.war -Dserver.port=$PORT $JAR_OPTS
