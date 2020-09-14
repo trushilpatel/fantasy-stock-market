@@ -84,7 +84,7 @@ export default {
       const data = { emailId: this.email, password: promptValue }
       console.log(data)
 
-      axios.post('http://localhost:8080/user/delete', data
+      axios.post(process.env.VUE_APP_BACK_END + '/user/delete', data
       )
         .then(response => {
           // Check For Message Sent By server

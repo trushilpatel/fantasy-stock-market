@@ -15,7 +15,7 @@ export default {
 
   methods: {
     getData () {
-      axios.get('http://localhost:3000/api/sectors').then(response => {
+      axios.get(process.env.VUE_APP_STOCK_MARKET_DATA + '/api/sectors').then(response => {
         this.sectorsRawData = response.data
         delete this.sectorsRawData['Meta Data']
         let tempSector = []

@@ -87,7 +87,7 @@ export default {
     getStockData () {
       const symbol = 'msft'
 
-      axios.get('http://localhost:3000/api/intraday/' + symbol).then(response => {
+      axios.get(process.env.VUE_APP_STOCK_MARKET_DATA + '/api/intraday/' + symbol).then(response => {
         const data = {}
         data.name = symbol
         data.data = {}
@@ -125,7 +125,7 @@ export default {
         this.stockData.push(data)
       })
       // this.symbols.forEach(symbol => {
-      //   const url = 'http://localhost:3000/api/intraday/' + symbol
+      //   const url = process.env.VUE_APP_STOCK_MARKET_DATA + 'api/intraday/' + symbol
       //   data.push(axios.get(url))
       // })
       // Promise.all(data).then(result => {
